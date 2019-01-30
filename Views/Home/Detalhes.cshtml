@@ -1,0 +1,26 @@
+@model IEnumerable<Transacao>
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<table>
+<tr>
+<td>Data do Pagamento</td>
+<td>Data</td>
+<td>Descricao</td>
+<td>Valor</td>
+<td>Categoria</td>
+</tr>
+
+@foreach (var item in @Model)
+{
+   <tr>
+   <td> @item.DataCompensacao</td>
+<td> @item.Data</td>
+<td> @item.Descricao</td>
+<td> @item.Valor</td>
+<td> @item.Categoria</td>
+</tr>
+}
+
+</table>
