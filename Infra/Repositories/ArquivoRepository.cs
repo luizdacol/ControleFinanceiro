@@ -3,6 +3,7 @@ using Models;
 using Models.Repositories;
 using System.Linq;
 using System;
+using System.IO;
 
 namespace Infra.Repositories
 {
@@ -12,14 +13,10 @@ namespace Infra.Repositories
 
         public IEnumerable<Transacao> GetTransacoes()
         {
-            List<Transacao> transacoes = new List<Transacao>();
+            if (!File.Exists(this._path))
+                return new List<Transacao>();
+
             var linhas = System.IO.File.ReadAllLines(this._path);
-            // foreach (var linha in linhas)
-            // {
-            //     var transacao = MapperTransacao.FromArquivo(linha);
-            //     transacoes.Add(transacao);
-            // }
-            // return transacoes;
             return linhas.Select(l => this.MapearTransacao(l));
         }
 
@@ -27,20 +24,21 @@ namespace Infra.Repositories
         {
             var linha = transacao.MapearLinha();
 
-            System.IO.File.AppendAllText(this._path, linha);
+            File.AppendAllText(this._path, linha);
 
             return true;
         }
 
         private Transacao MapearTransacao(string linha)
         {
+            var id = Guid.Parse(linha.Substring(104));
             var dataCompensacao = DateTime.Parse(linha.Substring(0, 10));
             var descricao = linha.Substring(22, 50);
             var categoria = linha.Substring(73, 20);
             var valor = Double.Parse(linha.Substring(94, 10));
             var data = DateTime.Parse(linha.Substring(11, 10));
 
-            return new Transacao(dataCompensacao, descricao, categoria, valor, data);
+            return new Transacao(id, dataCompensacao, descricao, categoria, valor, data);
         }
     }
 }
