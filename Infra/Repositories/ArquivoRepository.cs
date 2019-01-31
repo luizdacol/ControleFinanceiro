@@ -20,11 +20,22 @@ namespace Infra.Repositories
             return linhas.Select(l => this.MapearTransacao(l));
         }
 
-        public bool AddTransacao(Transacao transacao)
+        public void AddTransacao(Transacao transacao)
         {
             var linha = transacao.MapearLinha();
-
             File.AppendAllText(this._path, linha);
+        }
+
+        public bool DeleteTransacao(Guid id)
+        {
+            var transacoes = this.GetTransacoes().ToList();
+            transacoes.RemoveAll(t => t.Id == id);
+
+            // var text = new System.Text.StringBuilder();
+            // transacoes.ForEach(t => text.Append(t.MapearLinha()));
+            // File.WriteAllText(this._path, text.ToString());
+
+            File.WriteAllLines(this._path, transacoes.Select(t => t.MapearLinha()));
 
             return true;
         }

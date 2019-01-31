@@ -38,6 +38,14 @@ namespace ControleFinanceiro.Controllers
             return View("Detalhes", transacoes);
         }
 
+        [HttpDelete]
+        public IActionResult Excluir(Guid id)
+        {
+            this._repository.DeleteTransacao(id);
+
+            return this.Listar();
+        }
+
 
     }
 }
