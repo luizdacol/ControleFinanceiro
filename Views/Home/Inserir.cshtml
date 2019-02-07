@@ -1,11 +1,55 @@
 @model Transacao
 
-<form id="formInserir" action="Inserir" method="POST">
-    <span>Data do Pagamento: </span><input type="text" id="DataCompensacao" name="DataCompensacao" /><br>
-    <span>Data: </span><input type="text" id="data" name="data" /><br>
-    <span>Descrição: </span><input type="text" id="descricao" name="descricao" /><br>
-    <span>Valor: </span><input type="text" id="valor" name="valor" /><br>
-    <span>Categoria: </span><input type="text" id="categoria" name="categoria" /><br>
 
-    <input type="submit" id="Enviar" value="Inserir" />
+<form>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+        <label for="firstName">Data</label>
+        <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+        <div class="invalid-feedback">
+            Valid first name is required.
+        </div>
+        </div>
+        <div class="col-md-6 mb-3">
+        <label for="lastName">Data do Pagamento</label>
+        <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+        <div class="invalid-feedback">
+            Valid last name is required.
+        </div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="username">Descrição</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="username" placeholder="" required>
+            <div class="invalid-feedback" style="width: 100%;">
+                Your username is required.
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-3">
+        <label for="valor">Valor</label>
+        <input type="text" class="form-control" id="valor" placeholder="" value="" required>
+        <div class="invalid-feedback">
+            Valid first name is required.
+        </div>
+        </div>
+        <div class="col-md-8 mb-3">
+        <label for="categoria">Categoria</label>
+        <input type="text" class="form-control" id="categoria" placeholder="" value="" required>
+        <div class="invalid-feedback">
+            Valid last name is required.
+        </div>
+        </div>
+    </div>
+
+    <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="same-address">
+              <label class="custom-control-label" for="same-address">Fazer outro lançamento</label>
+            </div>
+        <input type="submit" id="Enviar" value="Inserir" />
+    
 </form>
